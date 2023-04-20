@@ -11,12 +11,63 @@ html, body {
   font-size: 16px;
   color: #fff;
   background-color: #000;
+  background-color: black;
+  color: yellow;
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   line-height: 1.2;
   font-weight: bold;
+}
+
+.header {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.header h1 {
+  font-size: 48px;
+  margin-bottom: 0;
+}
+
+.navbar {
+  background-color: yellow;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  display: inline-block;
+}
+
+.navbar li a {
+  display: block;
+  padding: 10px;
+  color: black;
+  text-decoration: none;
+}
+
+.section {
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.section p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 30px;
 }
 
 a {
