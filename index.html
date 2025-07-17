@@ -12,12 +12,12 @@
     <h1>Hey 👋 I'm Toffee</h1>
     <p>I’m a self-taught developer passionate about building web applications.</p>
 
-    <section> /* about me */
+    <section> <!-- about me -->
       <h2>About Me</h2>
       <p>I specialize in front-end development, user experience, and digital minimalism. Currently exploring web performance and privacy-respecting technologies.</p>
     </section>
 
-    <section> /* skills */
+    <section> <!-- skills -->
       <h2>Skills</h2>
       <ul>
         <li class="skill-icon">
@@ -39,24 +39,50 @@
       </ul>
     </section>
 
-    <section> /* shows */
+    <section> <!-- shows -->
       <h2>Shows I like:</h2>
       <div class="shows">
-        <img src="icons/trinityblood.jpg">
-        <img src="icons/dmc.jpg">
-        <img src="icons/saiki.jpg">
-        <img src="icons/detective.jpg">
+        <img zoomtastic src="icons/trinityblood.jpg">
+        <img zoomtastic src="icons/dmc.jpg">
+        <img zoomtastic src="icons/saiki.jpg">
+        <img zoomtastic src="icons/detective.jpg">
       </div>
     </section>
 
-    <section> /* contacts */
+    <section> <!-- contacts -->
       <h2>Contacts</h2>
       <p>Telegram: <a href="https://t.me/your_handle">test</a></p>
     </section>
 
-    <footer> /* made with */
+    <footer> <!-- made with-->
       <p>Made with HTML & CSS</p>
     </footer>
+
+<script src="https://unpkg.com/zoomtastic@2.3.1"></script>
+
+<script>
+
+	// Mount viewer element
+	Zoomtastic.mount({
+		size: '95%',
+		easing: 'ease',
+		duration: 500,
+		background: 'rgba(0, 0, 0, 0.9)',
+		filter: 'drop-shadow(0 2px 16px rgba(0, 0, 0, 0.3))',
+		animation: 'slide' // Can be slide, fade, zoom or drop
+	});
+
+	// Listen for an elements that contains "zoomtastic" attribute, 
+	// and use "src" attribute as image source
+	Zoomtastic.listen('[zoomtastic]', 'src');
+
+	// Show image manually
+	Zoomtastic.show('https://via.placeholder.com/256');
+
+	// Hide image
+	Zoomtastic.hide();
+
+</script>
   </main>
 </body>
 </html>
