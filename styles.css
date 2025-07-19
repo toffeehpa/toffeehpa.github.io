@@ -1,3 +1,8 @@
+html,
+body {
+  overflow-x: hidden;
+}
+
 /* reset */
 * {
   margin: 0;
@@ -9,7 +14,7 @@
 @font-face {
   font-family: 'Dotrice-Expanded';
   src: url('fonts/Dotrice-Bold-Expanded.woff2') format('woff2'),
-       url('fonts/Dotrice-Expanded.woff')  format('woff');
+    url('fonts/Dotrice-Expanded.woff') format('woff');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -23,22 +28,44 @@
   width: 200px;
   height: 200px;
   pointer-events: none;
-  opacity: 0;
+  opacity: 0.5;
   animation: fadeGradient 2.4s ease-out forwards;
   z-index: -1;
 }
 
 @keyframes fadeGradient {
-  from { opacity: 0; }
-  to   { opacity: 0.5; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.5;
+  }
 }
 
 .gradient-shape {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
   object-fit: contain;
-  filter: blur(80px);
-  transform: scale(1.2) rotate(15deg);
+  filter: blur(80px) saturate(200%);
+  transform-origin: center center;
+}
+
+.shape1 {
+  animation: rotateCW 10s linear infinite;
+}
+
+@keyframes rotateCW {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* base */
@@ -48,34 +75,131 @@ body {
   display: flex;
   justify-content: flex-end;
   padding: 2rem;
-  color: rgba(127,127,127,0.9);
+  color: rgba(127, 127, 127, 0.9);
 }
 
 /* container */
 .container {
+  position: relative;
+  z-index: 1;
   max-width: 600px;
-  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  margin: 0;
+  /* For mobile devices (chtoby ne tyanul vpravo-vlevo */
+  padding: 2rem 1rem;
+  /* gorizontaly padding pod mobilniye */
+  box-sizing: border-box;
+  overflow: hidden;
   background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%) brightness(120%) contrast(110%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(120%) contrast(110%);
   border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow:
-    inset 0 0 0.5px rgba(255,255,255,0.15),
-    0 8px 24px rgba(0,0,0,0.25);
-  border: 1px solid rgba(255,255,255,0.2);
+    inset 0 0 50px rgba(255, 255, 255, 0.1),
+    inset 0 0 0.5px rgba(255, 255, 255, 0.2),
+    0 8px 24px rgba(0, 0, 0, 0.25);
+  transition:
+    backdrop-filter 0.6s ease,
+    -webkit-backdrop-filter 0.6s ease,
+    background-color 0.6s ease,
+    box-shadow 0.6s ease,
+    border-color 0.6s ease;
+}
+
+/* --- adaptiv pod mobilniye --- */
+@media (max-width: 600px) {
+  body {
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  .container {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* shumovoy tile */
+@keyframes noiseFlicker {
+
+  0%,
+  100% {
+    opacity: 0.04;
+  }
+
+  50% {
+    opacity: 0.06;
+  }
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  transition: opacity 0.6s ease-in-out;
+  border-radius: 20px;
+  inset: 0;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='100'%20height='100'%3E%3Cfilter%20id='noise'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='4'%20stitchTiles='stitch'/%3E%3C/filter%3E%3Crect%20width='100'%20height='100'%20filter='url(%23noise)'/%3E%3C/svg%3E"
+    );
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  mix-blend-mode: overlay;
+  opacity: 0.025;
+  pointer-events: none;
+  animation: noiseFlicker 3s infinite ease-in-out;
+}
+
+.container::after {
+  content: "";
+  transition: background 0.6s ease, filter 0.6s ease;
+  position: absolute;
+  border-radius: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  z-index: 2;
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  filter: blur(8px);
+}
+
+.container>* {
+  position: relative;
+  z-index: 3;
+}
+
+.container:hover {
+  backdrop-filter: blur(24px) saturate(250%) brightness(130%) contrast(115%);
+  -webkit-backdrop-filter: blur(24px) saturate(250%) brightness(130%) contrast(115%);
+}
+
+.container:hover::before {
+  opacity: 0.08;
+}
+
+.container:hover::after {
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0) 100%);
+  filter: blur(12px);
 }
 
 /* headings with custom font */
-.container > h1,
-.container section > h2 {
+.container>h1,
+.container section>h2 {
   font-family: 'Dotrice-Expanded', sans-serif;
   font-weight: 200;
 }
 
-.container section + section {
+.container section+section {
   margin-top: 3rem;
 }
 
+/* avatar */
 .avatar {
   width: 128px;
   height: 128px;
@@ -83,13 +207,16 @@ body {
   object-fit: cover;
   margin: 0 0 2rem auto;
   display: block;
-  box-shadow: 0 4px 20px rgba(255,255,255,0.08);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.08);
 }
 
-h1, h2, p {
+/* text */
+h1,
+h2,
+p {
   text-align: right;
   margin-bottom: 1rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 /* icons-wrapper: flex right */
@@ -110,17 +237,13 @@ h1, h2, p {
   transition: filter 0.6s ease, opacity 0.6s ease;
 }
 
-/* active (glow) */
 .icon.active {
   opacity: 1;
   filter:
-    brightness(1.5)
-    saturate(1.5)
-    drop-shadow(0 0 6px var(--glow-color))
-    drop-shadow(0 0 12px var(--glow-color));
+    brightness(1.5) saturate(1.5) drop-shadow(0 0 6px var(--glow-color)) drop-shadow(0 0 12px var(--glow-color));
 }
 
-/* Toolbox images */
+/* shows */
 .shows {
   display: flex;
   gap: 1rem;
@@ -135,52 +258,8 @@ h1, h2, p {
   object-fit: cover;
   display: block;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-
-/* old glow-icon (закомментировано для сохранения) */
-/*
-.glow-icon {
-  display: flex;
-  flex-direction: column;
-  opacity: 0.3;
-  filter: brightness(0.5) saturate(0.5);
-  transition: filter 0.6s ease, opacity 0.6s ease;
-  align-items: center;
-  background-color: rgba(255,255,255,0.04);
-  padding: 1rem;
-  border-radius: 12px;
-  width: 90px;
-  color: rgba(255,255,255,0.9);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-}
-
-.glow-icon {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.glow-icon:hover {
-  transform: scale(1.05);
-  background-color: rgba(255,255,255,0.07);
-}
-
-.glow-icon img {
-  width: 32px;
-  height: 32px;
-}
-
-.glow-icon.visible {
-  opacity: 1;
-  filter:
-    brightness(1.5)
-    saturate(2)
-    drop-shadow(0 0 6px #f7df1e)
-    drop-shadow(0 0 12px #f7df1e80);
-}
-*/
 
 /* list style for Principles */
 ul {
@@ -205,12 +284,18 @@ footer {
   body {
     justify-content: center;
   }
+
   .container {
     margin: 0;
   }
-  h1, h2, p, footer {
+
+  h1,
+  h2,
+  p,
+  footer {
     text-align: center;
   }
+
   .icons-wrapper,
   .shows,
   ul {
