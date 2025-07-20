@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="icons/avatar.svg" type="image/svg+xml" />
+  <title>Toffee | Developer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute; width:0; height:0;">
+    <filter id="noiseFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.03" />
+      </feComponentTransfer>
+    </filter>
+  </svg>
+
+</head>
+
+<body>
+  <div class="gradient-wrapper" aria-hidden="true">
+    <div class="gradient">
+      <img src="icons/gradient-shape.webp" alt="" class="gradient-shape shape1" />
+    </div>
+  </div>
+
+  <main class="container">
+    <img src="icons/avatar.svg" alt="avatarka" class="avatar" />
+    <h1>Hey 👋 I'm Toffee</h1>
+    <p>I’m a self-taught developer passionate about building web applications.</p>
+
+    <section> <!-- about me -->
+      <h2>About Me</h2>
+      <p>I specialize in front-end development, user experience, and digital minimalism. Currently exploring web
+        performance and privacy-respecting technologies.</p>
+    </section>
+
+    <section class="skills"> <!-- skills -->
+      <h2>Skills</h2>
+      <div class="icons-wrapper">
+        <img src="icons/html5.svg" alt="HTML5" class="icon" data-delay="0" data-glow="#e44d26" />
+
+        <img src="icons/css3.svg" alt="CSS3" class="icon" data-delay="50" data-glow="#264de4" />
+
+        <img src="icons/javascript.svg" alt="JavaScript" class="icon" data-delay="100" data-glow="#f7df1e" />
+
+        <img src="icons/typescript.svg" alt="TypeScript" class="icon" data-delay="150" data-glow="#007396" />
+
+        <img src="icons/java.svg" alt="Java" class="icon" data-delay="200" data-glow="#007396" />
+      </div>
+    </section>
+
+    <section> <!-- toolbox -->
+      <h2>Toolbox</h2>
+      <p>I mostly work with lightweight, privacy-respecting tools and minimal setups. Here are a few I use regularly:
+      </p>
+      <div class="icons-wrapper">
+        <img src="icons/vscode.svg" alt="VS Code" class="icon" data-delay="0" data-glow="#007396" />
+
+        <img src="icons/git.svg" alt="Git" class="icon" data-delay="50" data-glow="#e44d26" />
+
+        <img src="icons/arch-linux.svg" alt="Arch Linux" class="icon" data-delay="100" data-glow="#007396" />
+
+        <img src="icons/firefox.svg" alt="Firefox" class="icon" data-delay="150" data-glow="#e44d26" />
+      </div>
+    </section>
+
+    <section> <!-- principles -->
+      <h2>Principles</h2>
+      <ul>
+        <li>💡 Minimalism over complexity</li>
+        <li>🧠 Learn by building</li>
+        <li>🔒 Privacy matters</li>
+        <li>🛠️ Prefer tools I can control</li>
+      </ul>
+    </section>
+
+    <section> <!-- interests -->
+      <h2>Interests</h2>
+      <p>I enjoy deep storytelling and creative coding experiments. I sometimes draw inspiration from anime, game
+        design, or forgotten tech.</p>
+    </section>
+
+    <section> <!-- shows -->
+      <h2>Shows I like:</h2>
+      <div class="shows">
+        <img zoomtastic src="icons/trinityblood.jpg" alt="Trinity Blood">
+        <img zoomtastic src="icons/dmc.jpg" alt="Devil May Cry">
+        <img zoomtastic src="icons/saiki.jpg" alt="Saiki">
+        <img zoomtastic src="icons/detective.jpg" alt="Detective Conan">
+      </div>
+    </section>
+
+    <section> <!-- presence -->
+      <h2>Presence</h2>
+      <p>No social media. Just this page.</p>
+    </section>
+
+    <footer> <!-- made with-->
+      <p>Made with HTML & CSS</p>
+    </footer>
+  </main>
+
+  <script src="https://unpkg.com/zoomtastic@2.3.1"></script>
+
+  <script>
+    // Zoomtastic init
+    Zoomtastic.mount({
+      size: '95%',
+      easing: 'ease',
+      duration: 500,
+      background: 'rgba(0, 0, 0, 0.9)',
+      filter: 'drop-shadow(0 2px 16px rgba(0, 0, 0, 0.3))',
+      animation: 'slide'
+    });
+    Zoomtastic.listen('[zoomtastic]', 'src');
+
+    // Glow-on-scroll init
+    document.addEventListener('DOMContentLoaded', () => {
+      const icons = document.querySelectorAll('.icon');
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const img = entry.target;
+          const delay = parseInt(img.dataset.delay, 10) || 0;
+          const glow = img.dataset.glow || '#fff';
+          img.style.setProperty('--glow-color', glow);
+          setTimeout(() => img.classList.add('active'), delay);
+          obs.unobserve(img);
+        });
+      }, { threshold: 0.2 });
+      icons.forEach(i => io.observe(i));
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const icons = document.querySelectorAll('.icon');
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const img = entry.target;
+          const delay = parseInt(img.dataset.delay, 10) || 0;
+
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              img.classList.add('active');
+            }, delay);
+          } else {
+            img.classList.remove('active');
+          }
+        });
+      }, {
+        threshold: 0.2
+      });
+
+      icons.forEach(icon => io.observe(icon));
+    });
+  </script>
+
+</body>
+
+</html>
