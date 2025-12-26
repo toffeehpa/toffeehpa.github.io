@@ -14,20 +14,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout your repository using git
+        uses: actions/checkout@v5
 
-      - name: Install, build, and upload
-        uses: withastro/action@v5 # оно само ставится (устанавливается)
-        with:
-          package-manager: npm@latest  # Явно указываем npm
+      - name: Install, build, and upload your site
+        uses: withastro/action@v5
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
