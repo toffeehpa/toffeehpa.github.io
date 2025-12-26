@@ -15,10 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4  # Актуальная версия
+        uses: actions/checkout@v4
 
       - name: Install, build, and upload
-        uses: withastro/action@v5
+        uses: withastro/action@v5 # оно само ставится (устанавливается)
+        with:
+          package-manager: npm@latest  # Явно указываем npm
 
   deploy:
     environment:
