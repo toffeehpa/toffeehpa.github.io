@@ -1,0 +1,1 @@
+import{a}from"./index.-fRWgakJ.js";import{s as r}from"./stagger.CENlEBGA.js";import"./resolve-elements.DdSog9Gr.js";a(".word",{opacity:[0,1],y:[8,0],filter:["blur(4px)","blur(0)"]},{delay:r(.025,{startDelay:.6}),ease:"easeOut",type:"spring",stiffness:200,damping:25});
