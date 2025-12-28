@@ -1,0 +1,22 @@
+<div class="avatar-wrapper" data-astro-cid-vjqwbl62>
+  <div class="colors-wrapper" data-astro-cid-vjqwbl62>
+    <div class="color white" data-astro-cid-vjqwbl62></div>
+    <div class="color green" data-astro-cid-vjqwbl62></div>
+    <div class="color red" data-astro-cid-vjqwbl62></div>
+    <div class="color blue" data-astro-cid-vjqwbl62></div>
+    <div class="color black" data-astro-cid-vjqwbl62></div>
+  </div>
+  <img src="images/photo.DRfOoD27_Z2krlOv.webp" alt="Me" loading="eager" data-astro-cid-vjqwbl62="true" decoding="async" fetchpriority="auto" width="128" height="128" class="avatar">
+</div>
+
+<script hoist>
+  import { a } from "./index.-fRWgakJ.js";
+  import { s as r } from "./stagger.CENlEBGA.js";
+  import "./resolve-elements.DdSog9Gr.js";
+  await a([
+    [".avatar-wrapper", { scale: [1.5, 1], filter: ["blur(8px)", "blur(0px)"] }, { duration: .6, ease: "easeOut" }],
+    [".avatar", { opacity: [0, 1] }, { duration: .6, ease: "easeInOut", at: .2 }],
+    [".color", { y: [-80, 0], filter: ["blur(8px)", "blur(0px)"], borderRadius: ["50%", "0%"] }, { delay: r(.03), duration: .4, ease: "easeOut", at: "<" }]
+  ]);
+  document.querySelector(".colors-wrapper")?.remove();
+</script>

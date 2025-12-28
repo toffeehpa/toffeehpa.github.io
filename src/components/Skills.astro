@@ -1,0 +1,34 @@
+---
+// Фронтматтер пустой
+---
+
+<div class="container" data-astro-cid-ab4ihpzs>
+  <div class="icons" data-astro-cid-ab4ihpzs>
+    <img src="_astro/typescript.DXWtzXiO_Zf8e6O.svg" alt="typescript-icon" style="transition-delay: 0ms;" loading="lazy" data-astro-cid-ab4ihpzs="true" decoding="async" fetchpriority="auto" width="32" height="33" class="icon">
+    <img src="_astro/python.uTKXZt8C_Zf49U8.svg" alt="python-icon" style="transition-delay: 200ms;" loading="lazy" data-astro-cid-ab4ihpzs="true" decoding="async" fetchpriority="auto" width="33" height="33" class="icon">
+    <img src="_astro/java.svg" alt="java-icon" style="transition-delay: 400ms;" loading="lazy" data-astro-cid-ab4ihpzs="true" decoding="async" fetchpriority="auto" width="33" height="33" class="icon">
+  </div>
+  <div class="glow" data-astro-cid-ab4ihpzs>
+    <img src="_astro/typescript.DXWtzXiO_Zf8e6O.svg" alt="typescript-glow" style="transition-delay: 0ms;" loading="lazy" data-astro-cid-ab4ihpzs="true" decoding="async" fetchpriority="auto" width="32" height="33" class="icon">
+    <img src="_astro/python.uTKXZt8C_Zf49U8.svg" alt="python-glow" style="transition-delay: 200ms;" loading="lazy" data-astro-cid-ab4ihpzs="true" decoding="async" fetchpriority="auto" width="33" height="33" class="icon">
+    <img src="_astro/java.svg" alt="java-glow" style="transition-delay: 400ms;" loading="lazy" data-astro-cid-ab4ihpzs="true" decoding="async" fetchpriority="auto" width="33" height="33" class="icon">
+  </div>
+</div>
+
+<script hoist>
+  import { r as d } from "./resolve-elements.DdSog9Gr.js";
+  const h = { some: 0, all: 1 };
+  function m(t, a, { root: f, margin: l, amount: s = "some" } = {}) {
+    const g = d(t), n = new WeakMap, v = r => {
+      r.forEach(e => {
+        const i = n.get(e.target);
+        if (e.isIntersecting !== !!i) if (e.isIntersecting) {
+          const c = a(e.target, e);
+          typeof c == "function" ? n.set(e.target, c) : o.unobserve(e.target)
+        } else typeof i == "function" && (i(e), n.delete(e.target))
+      })
+    }, o = new IntersectionObserver(v, { root: f, rootMargin: l, threshold: typeof s == "number" ? s : h[s] });
+    return g.forEach(r => o.observe(r)), () => o.disconnect()
+  }
+  m(".container", t => (t.classList.add("active"), () => t.classList.remove("active")), { margin: "-10%" });
+</script>
